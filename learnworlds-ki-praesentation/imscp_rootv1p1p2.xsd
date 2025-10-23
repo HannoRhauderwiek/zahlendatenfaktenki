@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.imsproject.org/xsd/imscp_rootv1p1p2"
+            xmlns="http://www.imsproject.org/xsd/imscp_rootv1p1p2"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            elementFormDefault="unqualified"
+            attributeFormDefault="unqualified"
+            version="1.1.2">
+
+    <xsd:annotation>
+        <xsd:documentation xml:lang="en">
+            IMS Content Packaging 1.1.2 Schema
+        </xsd:documentation>
+    </xsd:annotation>
+
+    <xsd:element name="manifest" type="manifestType"/>
+
+    <xsd:complexType name="manifestType">
+        <xsd:sequence>
+            <xsd:element name="metadata" type="metadataType" minOccurs="0"/>
+            <xsd:element name="organizations" type="organizationsType"/>
+            <xsd:element name="resources" type="resourcesType"/>
+        </xsd:sequence>
+        <xsd:attribute name="identifier" type="xsd:ID" use="required"/>
+        <xsd:attribute name="version" type="xsd:string"/>
+    </xsd:complexType>
+
+    <xsd:complexType name="metadataType">
+        <xsd:sequence>
+            <xsd:element name="schema" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="schemaversion" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="organizationsType">
+        <xsd:sequence>
+            <xsd:element name="organization" type="organizationType" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+        <xsd:attribute name="default" type="xsd:IDREF"/>
+    </xsd:complexType>
+
+    <xsd:complexType name="organizationType">
+        <xsd:sequence>
+            <xsd:element name="title" type="xsd:string"/>
+            <xsd:element name="item" type="itemType" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+        <xsd:attribute name="identifier" type="xsd:ID" use="required"/>
+    </xsd:complexType>
+
+    <xsd:complexType name="itemType">
+        <xsd:sequence>
+            <xsd:element name="title" type="xsd:string"/>
+        </xsd:sequence>
+        <xsd:attribute name="identifier" type="xsd:ID" use="required"/>
+        <xsd:attribute name="identifierref" type="xsd:string"/>
+    </xsd:complexType>
+
+    <xsd:complexType name="resourcesType">
+        <xsd:sequence>
+            <xsd:element name="resource" type="resourceType" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="resourceType">
+        <xsd:sequence>
+            <xsd:element name="file" type="fileType" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+        <xsd:attribute name="identifier" type="xsd:ID" use="required"/>
+        <xsd:attribute name="type" type="xsd:string" use="required"/>
+        <xsd:attribute name="href" type="xsd:string"/>
+    </xsd:complexType>
+
+    <xsd:complexType name="fileType">
+        <xsd:attribute name="href" type="xsd:string" use="required"/>
+    </xsd:complexType>
+
+</xsd:schema>
